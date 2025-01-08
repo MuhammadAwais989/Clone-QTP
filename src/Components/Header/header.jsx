@@ -84,7 +84,7 @@ export function Header() {
                   <Link to="/traffic/managment">Traffic Managment</Link>
                 </li>
                 <li>
-                  <Link to="">Traffic Problem</Link>
+                  <Link to="/traffic/problem">Traffic Problem</Link>
                 </li>
                 <li>
                   <Link to="">Challan/Fine</Link>

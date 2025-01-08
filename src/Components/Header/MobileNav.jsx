@@ -88,7 +88,7 @@ export function MobileNav({
                   <Link to="/traffic/managment">Traffic Management</Link>
                 </li>
                 <li>
-                  <Link to="">Traffic Problems</Link>
+                  <Link to="/traffic/problem">Traffic Problems</Link>
                 </li>
                 <li>
                   <Link to="">Challan/fine</Link>

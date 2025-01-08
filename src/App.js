@@ -12,6 +12,7 @@ import International from "./Components/Header/License/International";
 import Permanent from "./Components/Header/License/Permanent";
 import LicenseVerification from "./Components/Header/License/LicenseVerification";
 import Management from "./Components/Header/Traffic/Management";
+import TrafficProblem from "./Components/Header/Traffic/TrafficProblem";
 // import {HeroSection} from "./Components/Hero/HeroSection";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/driving/verification" element={<LicenseVerification />} />
           <Route path="/traffic" element={<Management />} />
           <Route path="/traffic/managment" element={<Management />} />
+          <Route path="/traffic/problem" element={<TrafficProblem />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1735,7 +1735,7 @@ textarea {
 .managment-cont{
   width: 100%;
   height: fit-content;
-  border: 1px solid;
+  /* border: 1px solid; */
   padding: 15px 25px;
   display: flex;
   align-items: center;
