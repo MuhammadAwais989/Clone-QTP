@@ -1754,6 +1754,59 @@ textarea {
 .manag-img img{
   width: 45vw;
 }
+.problem-cont{
+  width: 100%;
+  height: fit-content;
+  border: 1px solid;
+}
+.problem-main{
+  width: 80%;
+  height: 100%;
+  /* border: 1px solid; */
+  margin: 0px auto;
+  padding: 20px 0px 10px 0px ;
+}
+.problem-main ul li{
+  list-style: none;
+  width: 100%;
+  height: fit-content;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 15px 30px ;
+  position: relative;
+}
+.problem-main ul li::after{
+  content: "";  
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.4px;
+  background: rgba(185, 184, 184, 0.692);
+  
+}
+.problem-main ul li:hover{
+  border: 1px solid gray;
+}
+.problem-clicker{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.problem-clicker h3{
+  font-size: 18px;
+  font-family: sans-serif;
+  color: #024d9e;
+  text-transform: uppercase;
+
+}
+.problem-para p{
+  font-size: 17.5px;
+  font-family: sans-serif;
+  color: rgb(119, 119, 119);
+  margin-top: 5px;
+}
+
 
 @media (max-width: 1024px) {
   .about1-text h4 {
