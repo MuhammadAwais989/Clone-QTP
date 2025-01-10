@@ -63,16 +63,16 @@ export function Header() {
                   <Link to="/driving/verification">License Verification</Link>
                 </li>
                 <li>
-                  <Link to="">Learner Permit</Link>
+                  <Link to="/driving/learnerPermit">Learner Permit</Link>
                 </li>
                 <li>
-                  <Link to="/driving/permanent">Permanent LICENSE</Link>
+                  <Link to="/driving/permanent">Permanent License</Link>
                 </li>
                 <li>
-                  <Link to="/driving/International">International LICENSE</Link>
+                  <Link to="/driving/International">International License</Link>
                 </li>
                 <li>
-                  <Link to="/driving/duplicate">Duplicate LICENSE</Link>
+                  <Link to="/driving/duplicate">Duplicate License</Link>
                 </li>
               </ul>
             </li>
@@ -87,7 +87,7 @@ export function Header() {
                   <Link to="/traffic/problem">Traffic Problem</Link>
                 </li>
                 <li>
-                  <Link to="">Challan/Fine</Link>
+                  <Link to="/traffic/challanfine">Challan/Fine</Link>
                 </li>
               </ul>
             </li>

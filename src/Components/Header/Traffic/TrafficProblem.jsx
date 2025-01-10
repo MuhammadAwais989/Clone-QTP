@@ -86,7 +86,7 @@ function TrafficProblem() {
                   <h3>{item.title}</h3>
                   <span>
                     <IoIosArrowDown
-                      style={{ fontSize: "22px", color: "gray" }}
+                    className={click[index] ? "arrowRotate" : ""}
                     />
                   </span>
                 </div>

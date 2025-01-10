@@ -13,7 +13,8 @@ import Permanent from "./Components/Header/License/Permanent";
 import LicenseVerification from "./Components/Header/License/LicenseVerification";
 import Management from "./Components/Header/Traffic/Management";
 import TrafficProblem from "./Components/Header/Traffic/TrafficProblem";
-// import {HeroSection} from "./Components/Hero/HeroSection";
+import Challan from "./Components/Header/Traffic/Challan";
+import Learner from "./Components/Header/License/Learner";
 
 function App() {
   return (
@@ -26,14 +27,16 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/offices" element={<OfficesPage />} />
           <Route path="/aims" element={<AimsPage/>} />
+          <Route path="/driving" element={<LicenseVerification />} />
           <Route path="/driving/duplicate" element={<DupicateLicense/>} />
           <Route path="/driving/International" element={<International/>} />
+          <Route path="/driving/learnerPermit" element={<Learner/>} />
           <Route path="/driving/permanent" element={<Permanent/>} />
-          <Route path="/driving" element={<LicenseVerification />} />
           <Route path="/driving/verification" element={<LicenseVerification />} />
           <Route path="/traffic" element={<Management />} />
           <Route path="/traffic/managment" element={<Management />} />
           <Route path="/traffic/problem" element={<TrafficProblem />} />
+          <Route path="/traffic/challanfine" element={<Challan />} />
         </Routes>
         <Footer />
       </BrowserRouter>

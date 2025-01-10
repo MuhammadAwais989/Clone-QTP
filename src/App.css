@@ -1692,7 +1692,7 @@ textarea {
   border-top-right-radius: 20px;
   padding-top: 16px;
 }
-.ver-field{
+.ver-field {
   width: 100%;
   display: grid;
   place-items: center;
@@ -1732,7 +1732,7 @@ textarea {
   margin-top: 20px;
   cursor: pointer;
 }
-.managment-cont{
+.managment-cont {
   width: 100%;
   height: fit-content;
   /* border: 1px solid; */
@@ -1741,72 +1741,96 @@ textarea {
   align-items: center;
   flex-direction: column;
 }
-.managment-cont p{
+.managment-cont p {
   font-weight: 600;
   font-family: sans-serif;
   text-align: center;
 }
-.manag-img{
+.manag-img {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.manag-img img{
+.manag-img img {
   width: 45vw;
 }
-.problem-cont{
+.problem-cont {
   width: 100%;
   height: fit-content;
-  border: 1px solid;
+  /* border: 1px solid; */
 }
-.problem-main{
+.problem-main {
   width: 80%;
   height: 100%;
   /* border: 1px solid; */
   margin: 0px auto;
-  padding: 20px 0px 10px 0px ;
+  padding: 20px 0px 10px 0px;
 }
-.problem-main ul li{
+.problem-main ul li {
   list-style: none;
   width: 100%;
   height: fit-content;
   border: 1px solid transparent;
   border-radius: 10px;
-  padding: 15px 30px ;
+  padding: 15px 30px;
   position: relative;
+  cursor: pointer;
 }
-.problem-main ul li::after{
-  content: "";  
+.problem-main ul li::after {
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 0.4px;
   background: rgba(185, 184, 184, 0.692);
-  
 }
-.problem-main ul li:hover{
+.problem-main ul li:hover {
   border: 1px solid gray;
 }
-.problem-clicker{
+.problem-clicker {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.problem-clicker h3{
+.arrowRotate {
+  transform: rotate(180deg);
+  font-size: 22px;
+  color: gray;
+  transition: all 0.3s;
+}
+.problem-clicker h3 {
   font-size: 18px;
   font-family: sans-serif;
   color: #024d9e;
   text-transform: uppercase;
-
 }
-.problem-para p{
+.problem-para p {
   font-size: 17.5px;
   font-family: sans-serif;
   color: rgb(119, 119, 119);
   margin-top: 5px;
+  text-align: justify;
 }
 
+.challanPara {
+  width: 80%;
+  font-weight: 600;
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0px auto;
+}
+.learner-cont{
+  width: 100%;
+  height: 500px;
+  border: 1px solid ;;
+}
+.learner-main{
+  width: 80%;
+  height: 100%;
+  border: 1px solid;
+  margin: 0px auto;
+}
 
 @media (max-width: 1024px) {
   .about1-text h4 {
@@ -1852,13 +1876,12 @@ textarea {
   .duplicate-main ul li {
     font-size: 17px;
   }
-  .ver-main{
+  .ver-main {
     width: 98%;
   }
-  .manag-img img{
+  .manag-img img {
     width: 80%;
   }
-  
 }
 @media (max-width: 768px) {
   .about1-text h4 {
@@ -1893,23 +1916,43 @@ textarea {
   .aim-text h1 {
     font-size: 4vw;
   }
-  .ver-heading h1{
+  .ver-heading h1 {
     font-size: 7.5vw;
   }
-  .ver-heading{
+  .ver-heading {
     width: 80%;
     height: fit-content;
     padding-bottom: 10px;
   }
-  .ver-field input{
+  .ver-field input {
     width: 80%;
   }
-  .managment-cont p{
+  .managment-cont p .challanPara {
     font-size: 14.5px;
     margin-bottom: 15px;
   }
-  .manag-img img{
+  .manag-img img {
     width: 100%;
-
+  }
+  .problem-main {
+    width: 90%;
+  }
+  .problem-clicker h3 {
+    font-size: 16px;
+  }
+  .problem-para p {
+    font-size: 15px;
+    margin-top: 7px;
+  }
+  .duplicate-main ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  .duplicate-main h1 {
+    font-size: 5.2vw;
+  }
+  .challanPara {
+    font-size: 14px;
+    margin-top: 15px;
   }
 }

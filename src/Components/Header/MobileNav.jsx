@@ -60,16 +60,16 @@ export function MobileNav({
                   <Link to="/driving/verification">License Verification</Link>
                 </li>
                 <li>
-                  <Link to="">Learner Permit</Link>
+                  <Link to="/driving/learnerPermit">Learner Permit</Link>
                 </li>
                 <li>
-                  <Link to="/driving/permanent">Permanent LICENSE</Link>
+                  <Link to="/driving/permanent">Permanent License</Link>
                 </li>
                 <li>
-                  <Link to="/driving/International">International LICENSE</Link>
+                  <Link to="/driving/International">International License</Link>
                 </li>
                 <li>
-                  <Link to="/driving/duplicate">Duplicate LICENSE</Link>
+                  <Link to="/driving/duplicate">Duplicate License</Link>
                 </li>
               </ul>
             ) : (
@@ -91,7 +91,7 @@ export function MobileNav({
                   <Link to="/traffic/problem">Traffic Problems</Link>
                 </li>
                 <li>
-                  <Link to="">Challan/fine</Link>
+                  <Link to="/traffic/challanfine">Challan/fine</Link>
                 </li>
               </ul>
             ) : (
