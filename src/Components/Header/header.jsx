@@ -101,7 +101,7 @@ export function Header() {
             <Link>
               <button className="active-btn">FM 88.6</button>
             </Link>
-            <Link>
+            <Link to="/onlineappointment">
               <button className="active-btn">Online Appointment</button>
             </Link>
           </div>

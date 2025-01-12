@@ -1820,57 +1820,57 @@ textarea {
   text-align: center;
   margin: 0px auto;
 }
-.learner-cont{
+.learner-cont {
   width: 100%;
   height: fit-content;
   /* border: 1px solid ;; */
 }
-.learner-main{
+.learner-main {
   width: 80%;
   height: 100%;
   /* border: 1px solid; */
   margin: 0px auto;
   display: flex;
 }
-.leaner-btns{
+.leaner-btns {
   width: 30%;
-  height: 100%;
+  height: 324px;
   /* border: 1px solid orange; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.leaner-btns button{
+.leaner-btns button {
   width: 11rem;
   padding: 10px 0px;
   font-family: sans-serif;
   font-size: 18px;
   display: block;
   border: 0.1px solid rgb(204, 203, 203);
-  margin: 5px 0px 40px 0px;
+  margin: 10px 0px 40px 0px;
   color: #003369;
   cursor: pointer;
   border-radius: 7px;
   box-shadow: 2px 2px 10px rgb(172, 171, 171);
 }
-.leaner-btns button:hover{
+.leaner-btns button:hover {
   border: 0.1px solid #002655;
 }
-.leaneractive{
+.leaneractive {
   background-color: #034ca0;
   color: #fff !important;
 }
-.leaner-content{
+.leaner-content {
   width: 70%;
   height: 100%;
   /* border: 1px solid #693800;   */
   padding-top: 10px;
 }
-.new-active{
+.new-active {
   width: 100%;
   height: 32px;
   border-radius: 20px;
-  border: 3px solid #002655;
+  border: 2.7px solid #002655;
   list-style: none;
   margin-top: 5px;
   padding: 0px 20px;
@@ -1879,30 +1879,114 @@ textarea {
   align-items: center;
   justify-content: space-between;
 }
-.new-active p{
+.new-active p {
   font-family: sans-serif;
   font-size: 17px;
   font-weight: 600;
   color: #003369;
 }
-.new-heading{
+.new-heading {
   font-family: sans-serif;
   color: #003369;
   font-size: 16px;
 }
-.new-img{
+.new-img {
   height: 400px;
   display: flex;
   justify-content: center;
 }
-.new-img img{
+.new-img img {
   width: 60%;
   height: 100%;
 }
-.process-heading{
+.process-heading {
   margin-top: 18px;
 }
+.appoint-cont {
+  width: 100%;
+  height: fit-content;
+}
+.appoint-main {
+  width: 80%;
+  height: 100%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.appoint-main img {
+  width: 180px;
+  height: auto;
+  margin-top: 21px;
+}
+.appoint-main h3 {
+  margin-top: 30px;
+  font-family: sans-serif;
+  color: #0054ba;
+}
+.appoint-btn {
+  width: 220px;
+  height: 45px;
+  background-color: #0054ba;
+  color: #fff;
+  margin-top: 25px;
+  border-radius: 30px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.appoint-btn:hover {
+  background-color: transparent;
+  border: 1px solid #0054ba;
+}
 
+.appoint-btn a {
+  text-decoration: none;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+.appoint-btn:hover a {
+  color: #003369 !important;
+}
+.applicant-cont {
+  width: 100%;
+  height: 350px;
+  background: url("./images/backgroundappint.7067c914c7faec88ba17.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+}
+.applicant-main {
+  width: 80%;
+  height: 100%;
+  margin: 0px auto;
+  border: 1px solid;
+}
+.applicant-date {
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  margin: 0px auto;
+}
+.applicant-date h4 {
+  font-family: sans-serif;
+  color: #003369;
+  font-size: 18px;
+}
+.applicant-date p {
+  width: fit-content;
+  font-family: sans-serif;
+  color: #0363d8;
+  font-size: 18px;
+  border: 1px solid #0054ba;
+  border-radius: 30px;
+  padding: 8px 60px;
+  font-weight: 600;
+  margin-top: 8px;
+  box-shadow: 1px 1px 10px #c9c9c9;
+}
 
 @media (max-width: 1024px) {
   .about1-text h4 {
@@ -1954,7 +2038,17 @@ textarea {
   .manag-img img {
     width: 80%;
   }
+  .learner-main {
+    width: 96%;
+  }
+  .leaner-btns button {
+    width: 9rem;
+  }
+  .new-img img {
+    width: 70%;
+  }
 }
+
 @media (max-width: 768px) {
   .about1-text h4 {
     margin-top: 20px;
@@ -2026,5 +2120,32 @@ textarea {
   .challanPara {
     font-size: 14px;
     margin-top: 15px;
+  }
+  .learner-main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .leaner-btns {
+    width: 100%;
+    flex-direction: row;
+    height: fit-content;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .leaner-btns button {
+    width: 130px;
+    margin: 20px 10px;
+  }
+  .new-img img {
+    width: 100%;
+  }
+  .new-main {
+    width: 100%;
+  }
+  .new-main ul {
+    width: 100%;
+  }
+  .leaner-content {
+    width: 95%;
   }
 }

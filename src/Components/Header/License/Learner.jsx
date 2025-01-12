@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import LearnerHeader from '../about/Offices/OfficesHeader'
 import New from './SubLearner/New'
+import Duplicate from './SubLearner/Duplicate'
+import Endorsement from './SubLearner/Endorsemnet'
 
 function Learner() {
   const [activebutton,setactivebutton] = useState('New'); 
@@ -37,6 +39,8 @@ function Learner() {
        {/* Content Section */}
        <div className="leaner-content">
         {activebutton === "New" && <New/>}
+        {activebutton === "Duplicate" && <Duplicate/>}
+        {activebutton === "Endorsement" && <Endorsement/>}
        </div>
       </div>
     </div>
