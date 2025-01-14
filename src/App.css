@@ -1952,7 +1952,7 @@ textarea {
 }
 .applicant-cont {
   width: 100%;
-  height: 350px;
+  height: fit-content;
   background: url("./images/backgroundappint.7067c914c7faec88ba17.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -1963,6 +1963,9 @@ textarea {
   height: 100%;
   margin: 0px auto;
   border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .applicant-date {
   width: fit-content;
@@ -2037,6 +2040,71 @@ textarea {
   color: #0363d8;
   font-size: 15px;
   font-weight: 600;
+}
+.applicant-input{
+  margin-top: 60px;
+}
+.applicant-input label,
+.applicant-input input{
+  display: block;
+  font-family: sans-serif;
+  color: #0363d8;
+  font-size: 15px;
+  font-weight: 600;
+}
+.applicant-input label{
+  font-size: 17px;
+}
+.applicant-input input{
+  width: 380px;
+  height: 40px;
+  border: 1px solid #0363d8;
+  border-radius: 5px;
+  padding-left: 10px;
+  margin-top: 5px;
+  box-shadow: 1px 1px 10px #c9c9c9;
+  margin-bottom: 20px;
+}
+.applicant-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.applicant-btn button {
+  width: fit-content;
+  height: 40px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-family: sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0px 10px;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  box-shadow: 1px 1px 10px #c9c9c9;
+}
+.applicant-cancel{
+  border: 3px solid #0667d6;
+  color: #0667d6;
+  box-shadow: 1px 1px 10px #c9c9c9;
+  background: transparent;
+}
+.applicant-next{
+  border: none;
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+}
+.next-active {
+  display: flex;
+  align-items: center;
+  background-color: #0054ba; 
+  color: white;
+  border: none;
+}
+.next-active:hover{
+  background-color: #1180ff;
 }
 
 
