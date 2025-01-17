@@ -2113,28 +2113,27 @@ textarea {
 .next-active:hover {
   background-color: #1180ff;
 }
-.branch-cont{
+.branch-cont {
   width: 100%;
-  height: 400px;
-  border: 1px solid;
+  height: fit-content;
 }
-.branch-main{
+.branch-main {
   width: 80%;
   height: 100%;
   margin: 0px auto;
-  border: 1px solid;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.branch-driving{
+.branch-driving {
   color: #0667d6;
   font-family: sans-serif;
   text-transform: uppercase;
   text-align: center;
   font-size: 19px;
+  margin-top: 60px;
 }
-.branch-main select{
+.branch-main select {
   width: 400px;
   padding: 7px 10px 7px 4px;
   color: #0b78ec;
@@ -2145,9 +2144,44 @@ textarea {
   font-weight: 600;
   border: 1px solid #0b78ec;
 }
+.branch-card {
+  height: 150px;
+  width: 200px;
+  box-shadow: 0px 0px 5px gray;
+}
+.branch-card:hover {
+  border: 2.5px solid #0b78ec;
+}
+.selected-card {
+  border: 2.5px solid #0b78ec;
+}
 
-
-
+.card-title {
+  font-family: sans-serif;
+  font-size: 17px;
+  color: #0b78ec;
+  width: 155px;
+  text-align: center;
+}
+.branch-card img {
+  width: 87%;
+  height: 87%;
+}
+.brnach-card-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 40px;
+  margin-top: 30px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.main-branch-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 @media (max-width: 1024px) {
   .about1-text h4 {
     margin-top: 20px;
@@ -2323,6 +2357,9 @@ textarea {
   .applicant-btn {
     margin-top: 40px;
   }
+  .branch-main{
+    width: 96%;
+  }
 }
 @media (max-width: 416px) {
   .applicant-input {
@@ -2330,5 +2367,11 @@ textarea {
   }
   .applicant-input input {
     width: 98%;
+  }
+  .branch-main select{
+    width: 95%;
+  }
+  .branch-driving{
+    font-size: 17px;
   }
 }
