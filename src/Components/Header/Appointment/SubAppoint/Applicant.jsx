@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
-
 import { MdOutlineNavigateNext } from "react-icons/md";
 import AppointDate from "./AppointDate";
+import Branch from "./Branch";
 
 function Applicant({ setShow }) {
   const [mobileNumber, setMobileNumber] = useState("");
   const [cnicNumber, setCnicNumber] = useState("");
   const [name, setName] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
-
-  
-
- 
+  const [showBranch, setShowBranch] = useState(false); // State to manage branch component visibility
 
   const handleMobileChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -45,47 +42,69 @@ function Applicant({ setShow }) {
     setIsFormValid(isValid);
   }, [name, mobileNumber, cnicNumber]);
 
+  // Handle Next button click to show Branch component
+  const handleNextClick = () => {
+    if (isFormValid) {
+      setShowBranch(true); 
+    }
+  };
+
+  // Handle Back button click in Branch component
+  const handleBackClick = () => {
+    setShowBranch(false); // Hide Branch component and show Applicant component
+  };
+
+  // Handle Cancel button click to show AppointmentMain component
+  const handleCancelClick = () => {
+    setShow(true); // Show the AppointmentMain component
+  };
+
   return (
     <>
-      <div className="applicant-cont">
-        <div className="applicant-main">
-          <AppointDate />
-          <div className="applicant-input">
-            <label htmlFor="">Name</label>
-            <input
-              type="text"
-              placeholder="Enter Your Name"
-              value={name}
-              onChange={handleNameChange}
-            />
-            <label htmlFor="">Mobile Number</label>
-            <input
-              type="text"
-              placeholder="Enter Your Number"
-              value={mobileNumber}
-              onChange={handleMobileChange}
-            />
-            <label htmlFor="">CNIC</label>
-            <input
-              type="text"
-              placeholder="Enter Your CNIC Number"
-              value={cnicNumber}
-              onChange={handleCnicChange}
-            />
-            <div className="applicant-btn">
-              <button className="applicant-cancel" onClick={() => setShow(true)}>
-                Cancel
-              </button>
-              <button
-                className={`${isFormValid ? "next-active" : "applicant-next"}`}
-                disabled={!isFormValid}
-              >
-                <h4>Next</h4> <span><MdOutlineNavigateNext /></span>
-              </button>
+      {showBranch ? (
+        <Branch onBackClick={handleBackClick} /> // Pass handleBackClick to Branch
+      ) : (
+        <div className="applicant-cont">
+          <div className="applicant-main">
+            <AppointDate />
+            <div className="applicant-input">
+              <label htmlFor="">Name</label>
+              <input
+                type="text"
+                placeholder="Enter Your Name"
+                value={name}
+                onChange={handleNameChange}
+              />
+              <label htmlFor="">Mobile Number</label>
+              <input
+                type="text"
+                placeholder="Enter Your Number"
+                value={mobileNumber}
+                onChange={handleMobileChange}
+              />
+              <label htmlFor="">CNIC</label>
+              <input
+                type="text"
+                placeholder="Enter Your CNIC Number"
+                value={cnicNumber}
+                onChange={handleCnicChange}
+              />
+              <div className="applicant-btn">
+                <button className="applicant-cancel" onClick={handleCancelClick}>
+                  Cancel
+                </button>
+                <button
+                  className={`${isFormValid ? "next-active" : "applicant-next"}`}
+                  disabled={!isFormValid}
+                  onClick={handleNextClick} // Handle Next button click
+                >
+                  <h4>Next</h4> <span><MdOutlineNavigateNext /></span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

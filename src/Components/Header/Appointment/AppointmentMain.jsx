@@ -20,13 +20,12 @@ function AppointmentMain() {
             />
             <h3>Driving License Balochistan</h3>
             <div className="appoint-btn">
-              {/* Button to hide the current view and show the form */}
               <button onClick={() => setShow(false)}>Online Appointment</button>
             </div>
           </div>
         </div>
       ) : (
-        <Applicant setShow={setShow} /> // Pass setShow function to Applicant component to allow toggling
+        <Applicant setShow={setShow} />  
       )}
     </>
   );
