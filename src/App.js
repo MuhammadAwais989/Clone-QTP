@@ -16,7 +16,6 @@ import TrafficProblem from "./Components/Header/Traffic/TrafficProblem";
 import Challan from "./Components/Header/Traffic/Challan";
 import Learner from "./Components/Header/License/Learner";
 import AppointmentMain from "./Components/Header/Appointment/AppointmentMain";
-import Reservation from "./Components/Header/Appointment/SubAppoint/Reservation";
 
 function App() {
   return (
@@ -39,7 +38,7 @@ function App() {
           <Route path="/traffic/managment" element={<Management />} />
           <Route path="/traffic/problem" element={<TrafficProblem />} />
           <Route path="/traffic/challanfine" element={<Challan />} />
-          <Route path="/onlineappointment" element={<Reservation/>} />
+          <Route path="/onlineappointment" element={<AppointmentMain />} />
         </Routes>
         <Footer />
       </BrowserRouter>
