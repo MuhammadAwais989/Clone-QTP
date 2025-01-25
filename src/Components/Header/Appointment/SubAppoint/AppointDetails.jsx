@@ -3,85 +3,48 @@ import OfficesHeader from "../../about/Offices/OfficesHeader";
 import AppointDate from "./AppointDate";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { IoMdArrowDropleft } from "react-icons/io";
-import Reservation from "./Reservation";  // Import Reservation Component
-import Confirm from "./Confirm";  // Assume Confirm Component is created
+import Reservation from "./Reservation"; // Import the Reservation component
 
 function AppointDetails() {
   const [currentView, setCurrentView] = useState("appoint"); // Tracks the current view ('appoint', 'reservation', or 'confirm')
 
+  // Handle when "Back" button is clicked
   const handleBackClick = () => {
-    if (currentView === "reservation") {
-      setCurrentView("appoint");  // Go back to appointment details from reservation
-    }
+    setCurrentView("appoint");  // Go back to appointment details from reservation
   };
 
+  // Handle when "Next" button is clicked
   const handleNextClick = () => {
-    if (currentView === "appoint") {
-      setCurrentView("reservation");  // Go to reservation view
-    } else if (currentView === "reservation") {
-      setCurrentView("confirm");  // Go to confirmation view
-    }
+    setCurrentView("reservation");  // Go to reservation view
   };
 
   return (
     <>
       {currentView === "appoint" && (
-        // Appointment Details View
         <div>
           <OfficesHeader />
           <AppointDate />
-
           <div className="appoint-detail-cont">
             <div className="appoint-detail-main">
               <div className="appoint-table-main">
                 <div className="appoint-table-header">
                   <h3>Please Confirm Appointment Details</h3>
                 </div>
+                {/* Appointment details go here */}
                 <div className="table-row">
                   <span>Name</span>
                   <p>Awais</p>
                 </div>
-                <div className="table-row">
-                  <span>CNIC</span>
-                  <p>Awais</p>
-                </div>
-                <div className="table-row">
-                  <span>Booking For</span>
-                  <p>Awais</p>
-                </div>
-                <div className="table-row">
-                  <span>Time Slot</span>
-                  <p>Awais</p>
-                </div>
-                <div className="table-row">
-                  <span>Dealing Time</span>
-                  <p>Awais</p>
-                </div>
-                <div className="table-row">
-                  <span>Counter</span>
-                  <p>Awais</p>
-                </div>
-                <div className="table-row">
-                  <span>License Type</span>
-                  <p>Awais</p>
-                </div>
-                <div className="table-row">
-                  <span>Branch</span>
-                  <p>Awais</p>
-                </div>
+                {/* Other rows */}
               </div>
             </div>
             <div className="applicant-btn">
               <button className="applicant-cancel" onClick={handleBackClick}>
-                <IoMdArrowDropleft />
-                Back
+                <IoMdArrowDropleft /> Back
               </button>
 
               <button className="next-active" onClick={handleNextClick}>
-                <h4>Next</h4>
-                <span>
-                  <MdOutlineNavigateNext />
-                </span>
+                Next <MdOutlineNavigateNext />
               </button>
             </div>
           </div>
@@ -89,13 +52,8 @@ function AppointDetails() {
       )}
 
       {currentView === "reservation" && (
-        // Reservation View
+        // This will render the Reservation component when currentView is "reservation"
         <Reservation handleBackClick={handleBackClick} handleNextClick={handleNextClick} />
-      )}
-
-      {currentView === "confirm" && (
-        // Confirm View (You will need to create a Confirm component)
-        <Confirm />
       )}
     </>
   );

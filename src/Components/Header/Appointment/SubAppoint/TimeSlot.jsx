@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import AppointDate from "./AppointDate";
 import { FiClock } from "react-icons/fi";
 import { TiTick } from "react-icons/ti";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { IoMdArrowDropleft } from "react-icons/io";
+import { FaUser } from "react-icons/fa";
+import AppointDate from "./AppointDate";
+import Reservation from "./Reservation";
 
-function TimeSlot() {
+function TimeSlot({ handleBackClick }) {
   const [selectedCard, setSelectedCard] = useState(null);
+  const [showReservation, setShowReservation] = useState(false);  // New state to toggle between components
 
   const TableData = [
     { id: 1, time: "9-10", seats: "10", available: "10", booked: "0" },
@@ -19,13 +22,24 @@ function TimeSlot() {
   ];
 
   const handleTimeSlotClick = (id) => {
-    setSelectedCard(id); // Update selected time slot
+    setSelectedCard(id);
   };
+
+  const handleNextClick = () => {
+    setShowReservation(true);  // Show Reservation when Next button is clicked
+  };
+
+  const handleBackClickInReservation = () => {
+    setShowReservation(false);  // Go back to TimeSlot when Back button in Reservation is clicked
+  };
+
+  if (showReservation) {
+    return <Reservation handleBackClick={handleBackClickInReservation} />;
+  }
 
   return (
     <div className="timeslot-cont">
       <div className="timeslot-main">
-        <AppointDate />
         <div className="table-main">
           <div className="table-header">
             <li>Select</li>
@@ -53,9 +67,7 @@ function TimeSlot() {
                     }}
                   />
                 </span>
-                <li>
-                  <FiClock />
-                </li>
+                <li><FiClock /></li>
                 <li>{item.time}</li>
                 <li>{item.seats}</li>
                 <li>{item.available}</li>
@@ -65,18 +77,16 @@ function TimeSlot() {
           </div>
         </div>
         <div className="applicant-btn">
-          <button className="applicant-cancel">
-            <IoMdArrowDropleft />
-            Back
+          <button className="applicant-cancel" onClick={handleBackClick}>
+            <IoMdArrowDropleft /> Back
           </button>
           <button
             className={`applicant-next ${selectedCard ? "next-active" : ""}`}
             disabled={!selectedCard}
+            onClick={handleNextClick}  // Trigger transition to Reservation component
           >
             <h4>Next</h4>
-            <span>
-              <MdOutlineNavigateNext />
-            </span>
+            <span><MdOutlineNavigateNext /></span>
           </button>
         </div>
       </div>

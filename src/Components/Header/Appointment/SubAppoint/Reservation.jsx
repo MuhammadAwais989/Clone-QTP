@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import AppointDate from "./AppointDate";
 import { FaUser } from "react-icons/fa";
-import { MdOutlineNavigateNext } from "react-icons/md";
 import { IoMdArrowDropleft } from "react-icons/io";
+import { MdOutlineNavigateNext } from "react-icons/md";
 
-function Reservation() {
-  const [selectedIndex, setSelectedIndex] = useState(null); // State to track selected card
+function Reservation({ handleBackClick }) {
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const Data = [
     { icon: <FaUser />, time: "12:06:00" },
@@ -20,43 +19,43 @@ function Reservation() {
   ];
 
   const handleCardClick = (index) => {
-    setSelectedIndex(index); // Update the selected card index
+    setSelectedIndex(index); // Select the clicked time slot
   };
+
+ 
 
   return (
     <>
-      <AppointDate />
-      <div className="Reser-cont">
-        <div className="Reser-main">
-          {Data.map((item, index) => (
-            <div
-              className="card-wrap"
-              key={index}
-              onClick={() => handleCardClick(index)} // Handle card click
-            >
+      
+        <div className="Reser-cont">
+          <div className="Reser-main">
+            {Data.map((item, index) => (
               <div
-                className="reser-card"
-                style={{
-                  backgroundColor: selectedIndex === index ? "#3072c2" : "", // Apply background color if selected
-                  color: selectedIndex === index ? "white" : "#4d975c", // Apply white text color if selected
-                }}
+                className="card-wrap"
+                key={index}
+                onClick={() => handleCardClick(index)}
               >
-                <span>{item.icon}</span>
-                <p>{item.time}</p>
+                <div
+                  className="reser-card"
+                  style={{
+                    backgroundColor: selectedIndex === index ? "#3072c2" : "",
+                    color: selectedIndex === index ? "white" : "#4d975c",
+                  }}
+                >
+                  <span>{item.icon}</span>
+                  <p>{item.time}</p>
+                </div>
               </div>
-            </div>
-          ))}
-          
-        </div>
+            ))}
+          </div>
           <div className="applicant-btn">
-            <button className="applicant-cancel">
-              <IoMdArrowDropleft />
-              Back
+            <button className="applicant-cancel" onClick={handleBackClick}>
+              <IoMdArrowDropleft /> Back
             </button>
 
             <button
               className={selectedIndex !== null ? "applicant-next next-active" : "applicant-next"}
-              disabled={selectedIndex === null} // Disable button if no card is selected
+              disabled={selectedIndex === null}
             >
               <h4>Next</h4>
               <span>
@@ -64,7 +63,8 @@ function Reservation() {
               </span>
             </button>
           </div>
-      </div>
+        </div>
+      
     </>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import AppointDate from "./AppointDate";
-import Branch from "./Branch";
+import Branch from "./Branch";  // Import Branch component
 
-function Applicant({ setShow }) {
+function Applicant() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [cnicNumber, setCnicNumber] = useState("");
   const [name, setName] = useState("");
@@ -45,24 +45,19 @@ function Applicant({ setShow }) {
   // Handle Next button click to show Branch component
   const handleNextClick = () => {
     if (isFormValid) {
-      setShowBranch(true); 
+      setShowBranch(true); // Show Branch component when form is valid
     }
   };
 
-  // Handle Back button click in Branch component
-  const handleBackClick = () => {
-    setShowBranch(false); // Hide Branch component and show Applicant component
-  };
-
-  // Handle Cancel button click to show AppointmentMain component
+  // Handle Cancel button click to reset form or show AppointmentMain component
   const handleCancelClick = () => {
-    setShow(true); // Show the AppointmentMain component
+    setShowBranch(false); // Optionally reset form or show AppointmentMain
   };
 
   return (
     <>
       {showBranch ? (
-        <Branch onBackClick={handleBackClick} /> // Pass handleBackClick to Branch
+        <Branch onBackClick={() => setShowBranch(false)} /> // Show Branch and pass back function
       ) : (
         <div className="applicant-cont">
           <div className="applicant-main">
