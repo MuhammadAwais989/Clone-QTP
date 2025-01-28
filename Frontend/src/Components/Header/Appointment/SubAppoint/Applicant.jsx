@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import AppointDate from "./AppointDate";
-import Branch from "./Branch";  // Import Branch component
+import Branch from "./Branch";  
+import axios from "axios";
 
 function Applicant() {
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [cnicNumber, setCnicNumber] = useState("");
   const [name, setName] = useState("");
+  const [cnicNumber, setCnicNumber] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
-  const [showBranch, setShowBranch] = useState(false); // State to manage branch component visibility
+  const [showBranch, setShowBranch] = useState(false); 
 
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    axios.post("http://localhost:3000/onlineappointment", {name, cnicNumber, mobileNumber})
+     .then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.error(error);
+    });
+    handleNextClick();
+  }
   const handleMobileChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
     if (value.length > 11) value = value.slice(0, 11);
@@ -42,22 +53,20 @@ function Applicant() {
     setIsFormValid(isValid);
   }, [name, mobileNumber, cnicNumber]);
 
-  // Handle Next button click to show Branch component
   const handleNextClick = () => {
     if (isFormValid) {
-      setShowBranch(true); // Show Branch component when form is valid
+      setShowBranch(true); 
     }
   };
 
-  // Handle Cancel button click to reset form or show AppointmentMain component
   const handleCancelClick = () => {
-    setShowBranch(false); // Optionally reset form or show AppointmentMain
+    setShowBranch(false); 
   };
 
   return (
     <>
       {showBranch ? (
-        <Branch onBackClick={() => setShowBranch(false)} /> // Show Branch and pass back function
+        <Branch onBackClick={() => setShowBranch(false)} /> 
       ) : (
         <div className="applicant-cont">
           <div className="applicant-main">
@@ -91,7 +100,7 @@ function Applicant() {
                 <button
                   className={`${isFormValid ? "next-active" : "applicant-next"}`}
                   disabled={!isFormValid}
-                  onClick={handleNextClick} // Handle Next button click
+                  onClick={handleSubmit} 
                 >
                   <h4>Next</h4> <span><MdOutlineNavigateNext /></span>
                 </button>

@@ -1,11 +1,21 @@
-import React, { use } from "react";
+import React, { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa6";
-
+import axios from "axios";
 
 function Confirm() {
   const [data, setData] = useState([]);
 
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/onlineappointment")
+  //     .then((response) => {
+  //       setData(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   return (
     <>
       <div className="appoint-detail-cont">
@@ -39,11 +49,11 @@ function Confirm() {
             {/* Appointment details */}
             <div className="table-row">
               <span>Name</span>
-              <p>Awais</p>
+              <p>{data.name}</p>
             </div>
             <div className="table-row">
               <span>CNIC</span>
-              <p>Awais</p>
+              <p>{data.cnicNumber}</p>
             </div>
             <div className="table-row">
               <span>Booking For</span>
