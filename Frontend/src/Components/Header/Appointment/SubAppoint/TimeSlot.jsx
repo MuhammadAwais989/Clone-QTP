@@ -3,13 +3,11 @@ import { FiClock } from "react-icons/fi";
 import { TiTick } from "react-icons/ti";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { IoMdArrowDropleft } from "react-icons/io";
-import { FaUser } from "react-icons/fa";
-import AppointDate from "./AppointDate";
-import Reservation from "./Reservation";
 
-function TimeSlot({ handleBackClick }) {
+function CombinedComponent() {
   const [selectedCard, setSelectedCard] = useState(null);
-  const [showReservation, setShowReservation] = useState(false);  // New state to toggle between components
+  const [selectedTime, setSelectedTime] = useState(""); // Store selected time
+  const [showReservation, setShowReservation] = useState(false);  
 
   const TableData = [
     { id: 1, time: "9-10", seats: "10", available: "10", booked: "0" },
@@ -21,20 +19,42 @@ function TimeSlot({ handleBackClick }) {
     { id: 7, time: "16-17", seats: "10", available: "10", booked: "0" },
   ];
 
-  const handleTimeSlotClick = (id) => {
+  // Handle user selection
+  const handleTimeSlotClick = (id, time) => {
     setSelectedCard(id);
+    setSelectedTime(time); // Store selected time in state
   };
 
+  // Proceed to Reservation
   const handleNextClick = () => {
-    setShowReservation(true);  // Show Reservation when Next button is clicked
+    console.log("Selected Time Slot:", selectedTime); // Check selected time
+    setShowReservation(true);
   };
 
+  // Go back from Reservation
   const handleBackClickInReservation = () => {
-    setShowReservation(false);  // Go back to TimeSlot when Back button in Reservation is clicked
+    setShowReservation(false);
   };
+
+  // Reservation Component inside the Combined Component
+  const Reservation = () => (
+    <div className="reservation-main">
+      <h4>Reservation Details</h4>
+      <p>Selected Time Slot: {selectedTime}</p>
+      <div className="applicant-btn">
+        <button className="applicant-cancel" onClick={handleBackClickInReservation}>
+          <IoMdArrowDropleft /> Back
+        </button>
+        <button className="applicant-next">
+          <h4>Confirm</h4>
+          <span><MdOutlineNavigateNext /></span>
+        </button>
+      </div>
+    </div>
+  );
 
   if (showReservation) {
-    return <Reservation handleBackClick={handleBackClickInReservation} />;
+    return <Reservation />;
   }
 
   return (
@@ -53,7 +73,7 @@ function TimeSlot({ handleBackClick }) {
             {TableData.map((item) => (
               <ul
                 key={item.id}
-                onClick={() => handleTimeSlotClick(item.id)}
+                onClick={() => handleTimeSlotClick(item.id, item.time)} // Pass time as argument
                 style={{
                   color: selectedCard === item.id ? "rgba(5, 127, 207, 0.9)" : "",
                 }}
@@ -77,7 +97,7 @@ function TimeSlot({ handleBackClick }) {
           </div>
         </div>
         <div className="applicant-btn">
-          <button className="applicant-cancel" onClick={handleBackClick}>
+          <button className="applicant-cancel" onClick={handleBackClickInReservation}>
             <IoMdArrowDropleft /> Back
           </button>
           <button
@@ -94,4 +114,4 @@ function TimeSlot({ handleBackClick }) {
   );
 }
 
-export default TimeSlot;
+export default CombinedComponent;

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { IoMdArrowDropleft } from "react-icons/io";
-import AppointDate from "./AppointDate"; // Ensure this import is correct
-import TimeSlot from "./TimeSlot"; // Import TimeSlot inside Branch component
+import AppointDate from "./AppointDate"; 
+import TimeSlot from "./TimeSlot"; 
+import axios from "axios"; // Import axios
 
-function Branch({ onBackClick }) { // Get onBackClick function as a prop
+function Branch({ onBackClick }) { 
   const [selectedCard, setSelectedCard] = useState(null);
   const [selectedBranch, setSelectedBranch] = useState("");
-  const [showTimeSlot, setShowTimeSlot] = useState(false); // State to toggle TimeSlot component
+  const [showTimeSlot, setShowTimeSlot] = useState(false);
+  const [selectedCardTitle, setSelectedCardTitle] = useState(""); // State to store selected card's title
 
   const CardData = [
     {
@@ -30,18 +32,37 @@ function Branch({ onBackClick }) { // Get onBackClick function as a prop
 
   const handleCardClick = (index) => {
     setSelectedCard(index);
+    setSelectedCardTitle(CardData[index].title); // Store the selected card's title
   };
 
   const handleBranchChange = (e) => {
     setSelectedBranch(e.target.value);
+    console.log(e.target.value);
+    
   };
 
   const handleNextClick = () => {
-    setShowTimeSlot(true); // Show TimeSlot component when Next button is clicked
+    setShowTimeSlot(true);
+    sendDataToBackend(); 
+  };
+
+  const sendDataToBackend = () => {
+    const data = {
+      branch: selectedBranch,
+      license: selectedCardTitle, 
+    };
+
+    axios.post("http://localhost:3000/onlineappointment", data) // Adjust URL based on your backend route
+      .then((response) => {
+        console.log("Data sent to backend:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error sending data to backend:", error);
+      });
   };
 
   const handleBackClick = () => {
-    setShowTimeSlot(false); // Hide TimeSlot and show Branch component again
+    setShowTimeSlot(false);
   };
 
   const isNextButtonEnabled = selectedBranch !== "" && selectedCard !== null;
@@ -55,7 +76,7 @@ function Branch({ onBackClick }) { // Get onBackClick function as a prop
             <h4 className="branch-driving">Select Driving License Branch</h4>
             <select name="Select" value={selectedBranch} onChange={handleBranchChange}>
               <option value="">Select...</option>
-              <option value="1">Quetta</option>
+              <option value="Quetta">Quetta</option>
             </select>
             <div className="brnach-card-main">
               {CardData.map((card, index) => (
@@ -65,9 +86,7 @@ function Branch({ onBackClick }) { // Get onBackClick function as a prop
                   onClick={() => handleCardClick(index)}
                 >
                   <div
-                    className={`first-card branch-card ${
-                      selectedCard === index ? "selected-card" : ""
-                    }`}
+                    className={`first-card branch-card ${selectedCard === index ? "selected-card" : ""}`}
                   >
                     <img src={card.img} alt={card.title} />
                   </div>
@@ -76,14 +95,14 @@ function Branch({ onBackClick }) { // Get onBackClick function as a prop
               ))}
             </div>
             <div className="applicant-btn">
-              <button className="applicant-cancel" onClick={onBackClick}> {/* Use onBackClick passed from Applicant */}
+              <button className="applicant-cancel" onClick={onBackClick}>
                 <IoMdArrowDropleft />
                 Back
               </button>
               <button
                 className={`applicant-next ${isNextButtonEnabled ? "next-active" : ""}`}
                 disabled={!isNextButtonEnabled}
-                onClick={handleNextClick} // Show TimeSlot on Next button click
+                onClick={handleNextClick}
               >
                 <h4>Next</h4>
                 <span>
@@ -94,7 +113,7 @@ function Branch({ onBackClick }) { // Get onBackClick function as a prop
           </>
         )}
 
-        {showTimeSlot && <TimeSlot handleBackClick={handleBackClick} />} {/* Show TimeSlot component and pass handleBackClick */}
+        {showTimeSlot && <TimeSlot handleBackClick={handleBackClick} />}
       </div>
     </div>
   );

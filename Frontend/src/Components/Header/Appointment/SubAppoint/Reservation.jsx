@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoMdArrowDropleft } from "react-icons/io";
 import { MdOutlineNavigateNext } from "react-icons/md";
-import AppointDetails from "./AppointDetails"; // Import the AppointDetails component
+import AppointDetails from "./AppointDetails";
+import Confirm from "./Confirm"; // Import Confirm component
 
 function Reservation({ handleBackClick }) {
-  const [currentView, setCurrentView] = useState("reservation"); // State to manage which view is shown
-  const [selectedIndex, setSelectedIndex] = useState(null); // State for selected index in reservation
+  const [currentView, setCurrentView] = useState("reservation");
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const Data = [
     { icon: <FaUser />, time: "12:06:00" },
@@ -21,12 +22,12 @@ function Reservation({ handleBackClick }) {
   ];
 
   const handleCardClick = (index) => {
-    setSelectedIndex(index); // Set the selected time slot
+    setSelectedIndex(index);
   };
 
   const handleNextClick = () => {
     if (selectedIndex !== null) {
-      setCurrentView("appointDetails"); // Switch to AppointDetails view when Next is clicked
+      setCurrentView("confirm"); // Set the view to "confirm"
     }
   };
 
@@ -73,6 +74,7 @@ function Reservation({ handleBackClick }) {
       )}
 
       {currentView === "appointDetails" && <AppointDetails setCurrentView={setCurrentView} />}
+      {currentView === "confirm" && <Confirm />} {/* Render Confirm component */}
     </div>
   );
 }

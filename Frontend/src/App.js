@@ -16,6 +16,7 @@ import TrafficProblem from "./Components/Header/Traffic/TrafficProblem";
 import Challan from "./Components/Header/Traffic/Challan";
 import Learner from "./Components/Header/License/Learner";
 import AppointmentMain from "./Components/Header/Appointment/AppointmentMain";
+import Branch from "./Components/Header/Appointment/SubAppoint/Branch";
 // import Confirm from "./Components/Header/Appointment/SubAppoint/Confirm";
 
 function App() {
