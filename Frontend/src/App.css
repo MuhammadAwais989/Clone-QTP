@@ -2245,7 +2245,7 @@ textarea {
 .Reser-cont {
   width: 100%;
   height: fit-content;
-  margin-top: 30px;
+  padding-top: 30px;
 }
 .Reser-main {
   width: 80%;
@@ -2255,6 +2255,7 @@ textarea {
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
 .card-wrap {
   width: 170px;

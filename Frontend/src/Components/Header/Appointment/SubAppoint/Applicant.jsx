@@ -5,6 +5,9 @@ import { FiClock } from "react-icons/fi";
 import { TiTick } from "react-icons/ti";
 import AppointDate from "./AppointDate";
 import axios from "axios";
+import { FaUser } from "react-icons/fa";
+import AppointDetails from "./AppointDetails";
+import Confirm from "./Confirm"; 
 
 function ApplicantWithTimeSlot() {
   const [name, setName] = useState("");
@@ -16,8 +19,11 @@ function ApplicantWithTimeSlot() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [showBranch, setShowBranch] = useState(false);
   const [showTimeSlot, setShowTimeSlot] = useState(false);
-  const [selectedTime, setSelectedTime] = useState(""); // Store selected time
+  const [selectedTime, setSelectedTime] = useState("");
   const [showReservation, setShowReservation] = useState(false);
+  const [selectedReservationTime, setSelectedReservationTime] = useState(""); 
+  const [currentView, setCurrentView] = useState("reservation");
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const CardData = [
     {
@@ -56,6 +62,7 @@ function ApplicantWithTimeSlot() {
       branch: selectedBranch,
       license: selectedCardTitle,
       timeslot: selectedTime,
+      dealingtiming: selectedReservationTime,
     };
 
     axios
@@ -63,7 +70,6 @@ function ApplicantWithTimeSlot() {
       .then((response) => {
         console.log("Data sent to backend:", response.data);
         setShowTimeSlot(true);
-        handleNextClickInTimeSlot(); // Backend pe data successfully send hone ke baad hi time slot dikhao
       })
       .catch((error) => {
         console.error("Error sending data to backend:", error);
@@ -93,8 +99,7 @@ function ApplicantWithTimeSlot() {
 
   const handleNextClick = () => {
     if (isFormValid) {
-      setShowBranch(true); // Applicant form hide, branch selection show
-      setShowTimeSlot(true); // Time slot UI show
+      setShowBranch(true);
     }
   };
 
@@ -109,17 +114,17 @@ function ApplicantWithTimeSlot() {
 
   const handleTimeSlotClick = (id, time) => {
     setSelectedCard(id);
-    setSelectedTime(time); // Store selected time in state
+    setSelectedTime(time);
   };
 
   const handleNextClickInTimeSlot = () => {
-    
-    console.log("Selected Time Slot:", selectedTime); // Check selected time
+    console.log("Selected Time Slot:", selectedTime);
     setShowReservation(true);
   };
 
   const handleBackClickInTimeSlot = () => {
-    setShowReservation(false);
+    setShowTimeSlot(false); // Hide the timeslot UI
+    setShowBranch(true);    // Show the branch selection UI
   };
 
   useEffect(() => {
@@ -130,64 +135,173 @@ function ApplicantWithTimeSlot() {
     );
   }, [name, mobileNumber, cnicNumber]);
 
-  const Reservation = () => (
-    <div className="reservation-main">
-      <h4>Reservation Details</h4>
-      <p>Selected Time Slot: {selectedTime}</p>
-      <div className="applicant-btn">
-        <button className="applicant-cancel" onClick={handleBackClickInTimeSlot}>
-          <IoMdArrowDropleft /> Back
-        </button>
-        <button className="applicant-next">
-          <h4>Confirm</h4>
-          <span>
-            <MdOutlineNavigateNext />
-          </span>
-        </button>
+  function Reservation({ handleBackClick }) {
+    const Data = [
+      { icon: <FaUser />, time: "12:06:00" },
+      { icon: <FaUser />, time: "12:12:00" },
+      { icon: <FaUser />, time: "12:18:00" },
+      { icon: <FaUser />, time: "12:24:00" },
+      { icon: <FaUser />, time: "12:30:00" },
+      { icon: <FaUser />, time: "12:36:00" },
+      { icon: <FaUser />, time: "12:42:00" },
+      { icon: <FaUser />, time: "12:48:00" },
+      { icon: <FaUser />, time: "12:54:00" },
+    ];
+  
+    const handleCardClick = (index) => {
+      setSelectedIndex(index);
+      setSelectedReservationTime(Data[index].time); // Store the selected time in state
+    };
+  
+    const handleNextClick = () => {
+      handleBranchSubmit();
+      if (selectedIndex !== null) {
+        setCurrentView("appointDetails"); // Set the view to "appointDetails"
+      }
+    };
+  
+    return (
+      <div>
+        {currentView === "reservation" && (
+          <div className="Reser-cont">
+            <AppointDate/>
+            <div className="Reser-main">
+              {Data.map((item, index) => (
+                <div
+                  className="card-wrap"
+                  key={index}
+                  onClick={() => handleCardClick(index)}
+                >
+                  <div
+                    className="reser-card"
+                    style={{
+                      backgroundColor: selectedIndex === index ? "#3072c2" : "",
+                      color: selectedIndex === index ? "white" : "#4d975c",
+                    }}
+                  >
+                    <span>{item.icon}</span>
+                    <p>{item.time}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="applicant-btn">
+              <button className="applicant-cancel" onClick={handleBackClick}>
+                <IoMdArrowDropleft /> Back
+              </button>
+              <button
+                className={selectedIndex !== null ? "applicant-next next-active" : "applicant-next"}
+                disabled={selectedIndex === null}
+                onClick={handleNextClick}
+              >
+                <h4>Next</h4>
+                <span>
+                  <MdOutlineNavigateNext />
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
+  
+        {currentView === "appointDetails" && <AppointDetails setCurrentView={setCurrentView} />}
+        {currentView === "confirm" && <Confirm selectedTime={selectedReservationTime} />} {/* Pass selectedTime to Confirm component */}
       </div>
-    </div>
-  );
+    );
+  }
 
   return (
-  <>
-    {!showBranch ? (
-      // Hide branch-cont when showBranch is false
-      <div className="applicant-cont">
-        <div className="applicant-main">
-          <AppointDate />
-          <div className="applicant-input">
-            <label htmlFor="">Name</label>
-            <input
-              type="text"
-              placeholder="Enter Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <label htmlFor="">Mobile Number</label>
-            <input
-              type="text"
-              placeholder="Enter Your Number"
-              value={mobileNumber}
-              onChange={handleMobileChange}
-            />
-            <label htmlFor="">CNIC</label>
-            <input
-              type="text"
-              placeholder="Enter Your CNIC Number"
-              value={cnicNumber}
-              onChange={handleCnicChange}
-            />
+    <>
+      {!showBranch ? (
+        <div className="applicant-cont">
+          <div className="applicant-main">
+            <AppointDate />
+            <div className="applicant-input">
+              <label htmlFor="">Name</label>
+              <input
+                type="text"
+                placeholder="Enter Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <label htmlFor="">Mobile Number</label>
+              <input
+                type="text"
+                placeholder="Enter Your Number"
+                value={mobileNumber}
+                onChange={handleMobileChange}
+              />
+              <label htmlFor="">CNIC</label>
+              <input
+                type="text"
+                placeholder="Enter Your CNIC Number"
+                value={cnicNumber}
+                onChange={handleCnicChange}
+              />
+              <div className="applicant-btn">
+                <button
+                  className="applicant-cancel"
+                  onClick={() => setShowBranch(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className={`${isFormValid ? "next-active" : "applicant-next"}`}
+                  disabled={!isFormValid}
+                  onClick={handleNextClick}
+                >
+                  <h4>Next</h4>
+                  <span>
+                    <MdOutlineNavigateNext />
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : !showTimeSlot ? (
+        <div className="branch-cont">
+          <div className="branch-main">
+            <AppointDate />
+            <h4 className="branch-driving">Select Driving License Branch</h4>
+            <select
+              name="Select"
+              value={selectedBranch}
+              onChange={handleBranchChange}
+            >
+              <option value="">Select...</option>
+              <option value="Quetta">Quetta</option>
+            </select>
+            <div className="brnach-card-main">
+              {CardData.map((card, index) => (
+                <div
+                  key={index}
+                  className="main-branch-card"
+                  onClick={() => handleCardClick(index)}
+                >
+                  <div
+                    className={`first-card branch-card ${
+                      selectedCard === index ? "selected-card" : ""
+                    }`}
+                  >
+                    <img src={card.img} alt={card.title} />
+                  </div>
+                  <h5 className="card-title">{card.title}</h5>
+                </div>
+              ))}
+            </div>
             <div className="applicant-btn">
               <button
                 className="applicant-cancel"
                 onClick={() => setShowBranch(false)}
               >
-                Cancel
+                <IoMdArrowDropleft /> Back
               </button>
               <button
-                className={`${isFormValid ? "next-active" : "applicant-next"}`}
-                disabled={!isFormValid}
-                onClick={handleNextClick} // Handle next click to show branch
+                className={`applicant-next ${
+                  selectedBranch && selectedCard !== null ? "next-active" : ""
+                }`}
+                disabled={!selectedBranch || selectedCard === null}
+                onClick={() => setShowTimeSlot(true)}
               >
                 <h4>Next</h4>
                 <span>
@@ -197,128 +311,71 @@ function ApplicantWithTimeSlot() {
             </div>
           </div>
         </div>
-      </div>
-    ) : !showTimeSlot ? (
-      // Branch selection section that shows if showBranch is true
-      <div className="branch-cont">
-        <div className="branch-main">
+      ) : !showReservation ? ( // Show timeslot UI only if showReservation is false
+        <div className="timeslot-cont">
           <AppointDate />
-          <h4 className="branch-driving">Select Driving License Branch</h4>
-          <select
-            name="Select"
-            value={selectedBranch}
-            onChange={handleBranchChange}
-          >
-            <option value="">Select...</option>
-            <option value="Quetta">Quetta</option>
-          </select>
-          <div className="brnach-card-main">
-            {CardData.map((card, index) => (
-              <div
-                key={index}
-                className="main-branch-card"
-                onClick={() => handleCardClick(index)}
-              >
-                <div
-                  className={`first-card branch-card ${
-                    selectedCard === index ? "selected-card" : ""
-                  }`}
-                >
-                  <img src={card.img} alt={card.title} />
-                </div>
-                <h5 className="card-title">{card.title}</h5>
+          <div className="timeslot-main">
+            <div className="table-main">
+              <div className="table-header">
+                <li>Select</li>
+                <li>Time Slot</li>
+                <li>Seats</li>
+                <li>Available</li>
+                <li>Booked</li>
               </div>
-            ))}
-          </div>
-          <div className="applicant-btn">
-            <button
-              className="applicant-cancel"
-              onClick={() => setShowBranch(false)}
-            >
-              <IoMdArrowDropleft /> Back
-            </button>
-            <button
-              className={`applicant-next ${
-                selectedBranch && selectedCard !== null ? "next-active" : ""
-              }`}
-              disabled={!selectedBranch || selectedCard === null}
-              onClick={handleNextClick} // Handle next click to show timeslot
-            >
-              <h4>Next</h4>
-              <span>
-                <MdOutlineNavigateNext />
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-    ) : (
-      // Show the time slot UI if showTimeSlot is true
-      <div className="timeslot-cont">
-          <AppointDate />
-        <div className="timeslot-main">
-          <div className="table-main">
-            <div className="table-header">
-              <li>Select</li>
-              <li>Time Slot</li>
-              <li>Seats</li>
-              <li>Available</li>
-              <li>Booked</li>
+  
+              <div className="table-body">
+                {TableData.map((item) => (
+                  <ul
+                    key={item.id}
+                    onClick={() => handleTimeSlotClick(item.id, item.time)}
+                    style={{
+                      color: selectedCard === item.id ? "rgba(5, 127, 207, 0.9)" : "",
+                    }}
+                  >
+                    <span>
+                      <TiTick
+                        style={{
+                          color: "green",
+                          fontSize: "25px",
+                          display: selectedCard === item.id ? "block" : "none",
+                        }}
+                      />
+                    </span>
+                    <li><FiClock /></li>
+                    <li>{item.time}</li>
+                    <li>{item.seats}</li>
+                    <li>{item.available}</li>
+                    <li>{item.booked}</li>
+                  </ul>
+                ))}
+              </div>
             </div>
-
-            <div className="table-body">
-              {TableData.map((item) => (
-                <ul
-                  key={item.id}
-                  onClick={() => handleTimeSlotClick(item.id, item.time)}
-                  style={{
-                    color: selectedCard === item.id ? "rgba(5, 127, 207, 0.9)" : "",
-                  }}
-                >
-                  <span>
-                    <TiTick
-                      style={{
-                        color: "green",
-                        fontSize: "25px",
-                        display: selectedCard === item.id ? "block" : "none",
-                      }}
-                    />
-                  </span>
-                  <li><FiClock /></li>
-                  <li>{item.time}</li>
-                  <li>{item.seats}</li>
-                  <li>{item.available}</li>
-                  <li>{item.booked}</li>
-                </ul>
-              ))}
+            <div className="applicant-btn">
+              <button
+                className="applicant-cancel"
+                onClick={handleBackClickInTimeSlot}
+              >
+                <IoMdArrowDropleft /> Back
+              </button>
+              <button
+                className={`applicant-next ${selectedCard ? "next-active" : ""}`}
+                disabled={!selectedCard}
+                onClick={handleNextClickInTimeSlot}
+              >
+                <h4>Next</h4>
+                <span>
+                  <MdOutlineNavigateNext />
+                </span>
+              </button>
             </div>
           </div>
-          <div className="applicant-btn">
-            <button
-              className="applicant-cancel"
-              onClick={handleBackClickInTimeSlot}
-            >
-              <IoMdArrowDropleft /> Back
-            </button>
-            <button
-              className={`applicant-next ${selectedCard ? "next-active" : ""}`}
-              disabled={!selectedCard}
-              onClick={handleBranchSubmit} // Handle submit for reservation
-            >
-              <h4>Next</h4>
-              <span>
-                <MdOutlineNavigateNext />
-              </span>
-            </button>
-          </div>
         </div>
-      </div>
-    )}
-
-    {showReservation && <Reservation />}
-  </>
-);
-
+      ) : (
+        <Reservation handleBackClick={() => setShowReservation(false)} />
+      )}
+    </>
+  );
 }
 
 export default ApplicantWithTimeSlot;

@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { IoMdArrowDropleft } from "react-icons/io";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import AppointDetails from "./AppointDetails";
-import Confirm from "./Confirm"; // Import Confirm component
+import Confirm from "./Confirm"; 
 
 function Reservation({ handleBackClick }) {
   const [currentView, setCurrentView] = useState("reservation");
