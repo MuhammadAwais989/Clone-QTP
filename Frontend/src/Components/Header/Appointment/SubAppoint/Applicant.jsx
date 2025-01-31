@@ -24,6 +24,41 @@ function ApplicantWithTimeSlot() {
   const [selectedReservationTime, setSelectedReservationTime] = useState(""); 
   const [currentView, setCurrentView] = useState("reservation");
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [data, setData] = useState();
+
+  const handleBranchSubmit = () => {
+    const data = {
+      name,
+      cnicNumber,
+      mobileNumber,
+      branch: selectedBranch,
+      license: selectedCardTitle,
+      timeslot: selectedTime,
+      dealingtiming: selectedReservationTime,
+    };
+
+    axios
+      .post("http://localhost:3000/onlineappointment", data)
+      .then((response) => {
+        console.log("Data sent to backend:", response.data);
+        setShowTimeSlot(true);
+      })
+      .catch((error) => {
+        console.error("Error sending data to backend:", error);
+      });
+  };
+  const fetchData = () => {
+    axios
+      .get("http://localhost:3000/onlineappointment")
+      .then((response) => {
+        setData(response.data[0])
+        console.log(response.data);
+        
+      })
+      
+      .catch((error) => console.error(error));
+      
+  };
 
   const CardData = [
     {
@@ -54,27 +89,7 @@ function ApplicantWithTimeSlot() {
     { id: 7, time: "16-17", seats: "10", available: "10", booked: "0" },
   ];
 
-  const handleBranchSubmit = () => {
-    const data = {
-      name,
-      cnicNumber,
-      mobileNumber,
-      branch: selectedBranch,
-      license: selectedCardTitle,
-      timeslot: selectedTime,
-      dealingtiming: selectedReservationTime,
-    };
-
-    axios
-      .post("http://localhost:3000/onlineappointment", data)
-      .then((response) => {
-        console.log("Data sent to backend:", response.data);
-        setShowTimeSlot(true);
-      })
-      .catch((error) => {
-        console.error("Error sending data to backend:", error);
-      });
-  };
+ 
 
   const handleMobileChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -155,6 +170,7 @@ function ApplicantWithTimeSlot() {
   
     const handleNextClick = () => {
       handleBranchSubmit();
+      fetchData();
       if (selectedIndex !== null) {
         setCurrentView("appointDetails"); // Set the view to "appointDetails"
       }
@@ -203,7 +219,7 @@ function ApplicantWithTimeSlot() {
           </div>
         )}
   
-        {currentView === "appointDetails" && <AppointDetails setCurrentView={setCurrentView} />}
+        {currentView === "appointDetails" && <AppointDetails setCurrentView={setCurrentView} data={data} />}
         {currentView === "confirm" && <Confirm selectedTime={selectedReservationTime} />} {/* Pass selectedTime to Confirm component */}
       </div>
     );

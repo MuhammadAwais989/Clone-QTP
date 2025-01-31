@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { IoMdArrowDropleft } from "react-icons/io";
 import Confirm from "./Confirm";
 
-function AppointDetails() {
+
+function AppointDetails({ setCurrentView, data } ) {
   const [showConfirm, setShowConfirm] = useState(false);
+  const [fetchData, setfetchData] = useState({});
+
+  useEffect(() => {
+    if (data) {
+      setfetchData(data);
+      
+    }
+  }, [data]);
 
   const handleBackClick = () => {
-    setShowConfirm(false); // Show AppointDetails again
+    setShowConfirm(false); 
   };
 
   const handleNextClick = () => {
-    setShowConfirm(true); // Show Confirm component
+    setShowConfirm(true); 
   };
 
   return (
@@ -27,7 +36,7 @@ function AppointDetails() {
                 {/* Appointment details */}
                 <div className="table-row">
                   <span>Name</span>
-                  <p>Awais</p>
+                  <p>{fetchData.name}</p>
                 </div>
                 <div className="table-row">
                   <span>CNIC</span>
