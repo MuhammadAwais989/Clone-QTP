@@ -1,35 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { FaDownload } from "react-icons/fa6";
-import axios from "axios";
 
-function Confirm() {
-  const [data, setData] = useState(null); 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/onlineappointment")
-      .then((response) => {
-        setData(response.data[0]); 
-        setLoading(false); // Data is now loaded
-        console.log(response.data);
-
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error fetching data. Please try again later.</div>;
-  }
+function Confirm({lastData}) {
+  const [data, setData] = useState(lastData); 
+ 
 
   return (
     <>
@@ -47,7 +21,7 @@ function Confirm() {
             >
               <h3>Appoint Details</h3>
               <button className="down-btn">
-                <FaDownload className="down-icon" />
+                <FaDownload className="down-icon"/>
                 <span>Download</span>
               </button>
             </div>
