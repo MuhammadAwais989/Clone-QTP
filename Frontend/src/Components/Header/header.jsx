@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "../../images/Nav_logo.2dec820e3e2d5541a67f.png";
 import { Link } from "react-router-dom";
 import { TbMenuDeep } from "react-icons/tb";
-import { MobileNav } from "./MobileNav";  // Import MobileNav component
+import { MobileNav } from "./MobileNav";  
 
 export function Header() {
   const [mobNav, setmobNav] = useState(false);
@@ -14,7 +14,7 @@ export function Header() {
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    if (scrollPosition > 250) {
+    if (scrollPosition > 190) {
       setIsScrolled(true);
     } else {
       setIsScrolled(false);
