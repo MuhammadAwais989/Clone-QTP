@@ -2620,4 +2620,8 @@ textarea {
     .below-1 span {
       font-size: 4.5vw;
     }
+    .table-row span{
+      font-size: 15.5px;
+    }
+    
 }
