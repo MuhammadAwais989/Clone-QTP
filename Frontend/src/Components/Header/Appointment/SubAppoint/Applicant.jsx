@@ -38,7 +38,7 @@ function ApplicantWithTimeSlot() {
     };
 
     axios
-      .post("http://localhost:3001/onlineappointment", data)
+      .post("http://localhost:3000/onlineappointment", data)
       .then((response) => {
         console.log("Data sent to backend:", response.data);
         setShowTimeSlot(true);

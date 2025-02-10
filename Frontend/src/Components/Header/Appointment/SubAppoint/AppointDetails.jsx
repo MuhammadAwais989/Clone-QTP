@@ -13,7 +13,7 @@ function AppointDetails() {
   useEffect(() => {
     const fetchDataFromAPI = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/onlineappointment");
+        const response = await axios.get("http://localhost:3000/onlineappointment");
         setFetchData(response.data);
       } catch (error) {
         console.error("Error fetching appointment data:", error);
