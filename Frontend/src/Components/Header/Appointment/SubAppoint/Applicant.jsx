@@ -143,8 +143,8 @@ function ApplicantWithTimeSlot() {
   };
 
   const handleBackClickInTimeSlot = () => {
-    setShowTimeSlot(false); // Hide the timeslot UI
-    setShowBranch(true);    // Show the branch selection UI
+    setShowTimeSlot(false); // Hide timeslot 
+    setShowBranch(true);    // Show branch
   };
 
   useEffect(() => {
