@@ -20,7 +20,7 @@ function ApplicantWithTimeSlot() {
   const [showTimeSlot, setShowTimeSlot] = useState(false);
   const [selectedTime, setSelectedTime] = useState("");
   const [showReservation, setShowReservation] = useState(false);
-  const [selectedReservationTime, setSelectedReservationTime] = useState(""); 
+  const [selectedReservationTime, setSelectedReservationTime] = useState("");
   const [currentView, setCurrentView] = useState("reservation");
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [NextDate, setNextDate] = useState();
@@ -47,23 +47,22 @@ function ApplicantWithTimeSlot() {
         console.error("Error sending data to backend:", error);
       });
   };
- 
-  useEffect(() => {
-      const updateDate = () => {
-        const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() + 1);
-        const date = currentDate.getDate();
-        const month = currentDate.toLocaleString("default", { month: "2-digit" });
-        const year = currentDate.getFullYear();
-        const formattedDate = `${date}-${month}-${year}`;
-        setNextDate(formattedDate);
-      };
-  
-      updateDate();
-      const intervalId = setInterval(updateDate, 24 * 60 * 60 * 1000);
-      return () => clearInterval(intervalId);
-    }, []);
 
+  useEffect(() => {
+    const updateDate = () => {
+      const currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() + 1);
+      const date = currentDate.getDate();
+      const month = currentDate.toLocaleString("default", { month: "2-digit" });
+      const year = currentDate.getFullYear();
+      const formattedDate = `${date}-${month}-${year}`;
+      setNextDate(formattedDate);
+    };
+
+    updateDate();
+    const intervalId = setInterval(updateDate, 24 * 60 * 60 * 1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const CardData = [
     {
@@ -93,8 +92,6 @@ function ApplicantWithTimeSlot() {
     { id: 6, time: "15-16", seats: "10", available: "10", booked: "0" },
     { id: 7, time: "16-17", seats: "10", available: "10", booked: "0" },
   ];
-
- 
 
   const handleMobileChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -143,8 +140,8 @@ function ApplicantWithTimeSlot() {
   };
 
   const handleBackClickInTimeSlot = () => {
-    setShowTimeSlot(false); // Hide timeslot 
-    setShowBranch(true);    // Show branch
+    setShowTimeSlot(false); // Hide timeslot
+    setShowBranch(true); // Show branch
   };
 
   useEffect(() => {
@@ -167,12 +164,12 @@ function ApplicantWithTimeSlot() {
       { icon: <FaUser />, time: "12:48:00" },
       { icon: <FaUser />, time: "12:54:00" },
     ];
-  
+
     const handleCardClick = (index) => {
       setSelectedIndex(index);
       setSelectedReservationTime(Data[index].time); // Store the selected time in state
     };
-  
+
     const handleNextClick = () => {
       handleBranchSubmit();
       // fetchData();
@@ -180,12 +177,12 @@ function ApplicantWithTimeSlot() {
         setCurrentView("appointDetails"); // Set the view to "appointDetails"
       }
     };
-  
+
     return (
       <div>
         {currentView === "reservation" && (
           <div className="Reser-cont">
-            <AppointDate/>
+            <AppointDate />
             <div className="Reser-main">
               {Data.map((item, index) => (
                 <div
@@ -211,7 +208,11 @@ function ApplicantWithTimeSlot() {
                 <IoMdArrowDropleft /> Back
               </button>
               <button
-                className={selectedIndex !== null ? "applicant-next next-active" : "applicant-next"}
+                className={
+                  selectedIndex !== null
+                    ? "applicant-next next-active"
+                    : "applicant-next"
+                }
                 disabled={selectedIndex === null}
                 onClick={handleNextClick}
               >
@@ -223,8 +224,10 @@ function ApplicantWithTimeSlot() {
             </div>
           </div>
         )}
-  
-        {currentView === "appointDetails" && <AppointDetails setCurrentView={setCurrentView}  />}
+
+        {currentView === "appointDetails" && (
+          <AppointDetails setCurrentView={setCurrentView} />
+        )}
         {/* {currentView === "confirm" && <Confirm selectedTime={selectedReservationTime} />} Pass selectedTime to Confirm component */}
       </div>
     );
@@ -266,7 +269,9 @@ function ApplicantWithTimeSlot() {
                   Cancel
                 </button>
                 <button
-                  className={`${isFormValid ? "next-active" : "applicant-next"}`}
+                  className={`${
+                    isFormValid ? "next-active" : "applicant-next"
+                  }`}
                   disabled={!isFormValid}
                   onClick={handleNextClick}
                 >
@@ -344,14 +349,17 @@ function ApplicantWithTimeSlot() {
                 <li>Available</li>
                 <li>Booked</li>
               </div>
-  
+
               <div className="table-body">
                 {TableData.map((item) => (
                   <ul
                     key={item.id}
                     onClick={() => handleTimeSlotClick(item.id, item.time)}
                     style={{
-                      color: selectedCard === item.id ? "rgba(5, 127, 207, 0.9)" : "",
+                      color:
+                        selectedCard === item.id
+                          ? "rgba(5, 127, 207, 0.9)"
+                          : "",
                     }}
                   >
                     <span>
@@ -363,7 +371,9 @@ function ApplicantWithTimeSlot() {
                         }}
                       />
                     </span>
-                    <li><FiClock /></li>
+                    <li>
+                      <FiClock />
+                    </li>
                     <li>{item.time}</li>
                     <li>{item.seats}</li>
                     <li>{item.available}</li>
@@ -380,7 +390,9 @@ function ApplicantWithTimeSlot() {
                 <IoMdArrowDropleft /> Back
               </button>
               <button
-                className={`applicant-next ${selectedCard ? "next-active" : ""}`}
+                className={`applicant-next ${
+                  selectedCard ? "next-active" : ""
+                }`}
                 disabled={!selectedCard}
                 onClick={handleNextClickInTimeSlot}
               >
